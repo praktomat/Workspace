@@ -186,22 +186,23 @@ public class Tile {
      */
     public boolean canBeRecoloredTo(Tile otherTile) {
 
-        // 4 Different color variations
-        // Nothing changed
-        if (otherTile.isExactlyEqualTo(this))
-            return true;
-
-        // Yellow and green swapped
-        if (otherTile.recolor(LineType.YELLOW, LineType.GREEN).isExactlyEqualTo(this))
-            return true;
-
-        // Yellow and red swapped
-        if (otherTile.recolor(LineType.YELLOW, LineType.RED).isExactlyEqualTo(this))
-            return true;
-
-        // Red and green swapped
-        if (otherTile.recolor(LineType.RED, LineType.GREEN).isExactlyEqualTo(this))
-            return true;
+        LineType[] colors = new LineType[] {LineType.RED, LineType.GREEN, LineType.YELLOW};
+        
+        // Iterate through all possibilites of recoloring
+        Tile[] permutations = new Tile[9];
+        
+        for(int i = 0; i < colors.length; i++) {
+            for(int j = 0; j < colors.length; j++) {
+                permutations[3*i+j] = this.recolor(colors[i], colors[j]);
+            }
+        }
+        
+        // Check if there is a possible recolor
+        for(Tile recolor : permutations) {
+            if(recolor.isExactlyEqualTo(otherTile))
+                return true;
+        }
+            
 
         return false;
     }
