@@ -336,7 +336,7 @@ public class Tile {
 	 *            neighbour's position
 	 * @return position in view of neighbor
 	 */
-	public static int getOppositePosition(int position) {
+	private static int getOppositePosition(int position) {
 		return (position + 3) % 6;
 	}
 }

@@ -13,11 +13,6 @@ public class Board {
 	 */
 	private static final int BOARD_SIZE = 12;
 
-	/**
-	 * Tiles are hexagons and have 6 edges
-	 */
-	private int MAX_TILE_EDGES = 6;
-
 	private Tile[] tiles;
 
 	/**
@@ -141,12 +136,13 @@ public class Board {
 			int[] neighbour = getNeighbours(tileId);
 
 			// Iterate through all neighbors of tile
-			for (int position = 0; position < MAX_TILE_EDGES; position++) {
+			for (int index = 0; index < neighbour.length; index++) {
 
-				// If there exists a neighbor, check if it fits (-1 means invalid neighbour)
-				if (neighbour[position] != -1) {
+				// If there exists a neighbor, check if it fits (-1 means
+				// invalid neighbour)
+				if (neighbour[index] != -1) {
 
-					if (!tiles[tileId].fitsTo(tiles[neighbour[position]], position))
+					if (!tiles[tileId].fitsTo(tiles[neighbour[index]], index))
 						return false;
 
 				}
@@ -157,17 +153,17 @@ public class Board {
 	}
 
 	/**
-	 * Calculates all valid neighbours and returns
-	 * their position on the board (tileId) 
+	 * Calculates all valid neighbours and returns their position on the board
+	 * (tileId)
 	 * 
 	 * @param tileId
 	 * @return array of neighbour position, where -1 is an invalid neighbour
 	 */
 	private int[] getNeighbours(int tileId) {
-		
+
 		// Notation for invalid tiles
 		final int OUT_OF_BOUNDS = -1;
-		
+
 		// Store all neigbours of this Tile
 		int[] neighbourPos = new int[6];
 
@@ -188,7 +184,8 @@ public class Board {
 		// No lower neighbours for 2, 5, 8, 11
 		if ((tileId - 2) % 3 == 0) {
 			neighbourPos[3] = OUT_OF_BOUNDS;
-			neighbourPos[4] = OUT_OF_BOUNDS;;
+			neighbourPos[4] = OUT_OF_BOUNDS;
+			;
 		}
 
 		// No Tiles with tileID > 11 and < 0
@@ -201,59 +198,78 @@ public class Board {
 	}
 
 	/**
+	 * Returns the color of the connected path or {@link LineType.NONE} if the
+	 * path does not connect
 	 * 
 	 * @param positions
-	 * @return
+	 *            array of tileIDs to check
+	 * @return LineType of the path
 	 */
 	public LineType getConnectedPathColor(int[] positions) {
 
-		Tile first = tiles[positions[0]];
-		Tile neighbour = tiles[positions[1]];
-
+		// Iterate through whole path
 		for (int i = 0; i < positions.length - 1; i++) {
 
-			if (!first.fitsTo(neighbour, positionOfNeighbour(positions[i], positions[i + 1])))
+			Tile first = tiles[positions[i]];
+			Tile neighbour = tiles[positions[i + 1]];
+
+			// Check step by step if the tiles connect with the tile ahead in
+			// path
+			// Break iteration when paths do not connect, return NONE
+			if (!connectsTo(first, neighbour, positionOfNeighbour(positions[i], positions[i + 1])))
 				return LineType.NONE;
 
 		}
-		return first.getLineTypeAtIndex(positionOfNeighbour(positions[0], positions[1]));
+
+		// If they do connect, simply take the color of any lines in the path
+		// (the first here)
+		return tiles[positions[0]].getLineTypeAtIndex(positionOfNeighbour(positions[0], positions[1]));
+	}
+
+	private boolean connectsTo(Tile first, Tile second, int position) {
+
+		// Where this Tile is attached to from otherTile's point of reference
+		int oppositePosition = (position + 3) % 6;
+
+		return first.getLineTypeAtIndex(position) == second.getLineTypeAtIndex(oppositePosition);
 	}
 
 	/**
-	 * Calculates the position from two IDs 
+	 * Calculates the position from two IDs
 	 * 
-	 * @param tileId position of the neighbour relative to this tile
-	 * @param neighbourId the neighbour
+	 * @param tileId
+	 *            position of the neighbour relative to this tile
+	 * @param neighbourId
+	 *            the neighbour
 	 * @return the position
 	 */
 	private int positionOfNeighbour(int tileId, int neighbourId) {
 
 		// The difference of the tileIDs have a special meaning
-		final int TOP = -1, TOP_RIGHT = 2, BOTTOM_RIGHT = 3, 
-				BOTTOM = 1, BOTTOM_LEFT = -2, TOP_LEFT = -3;
-		
+		final int TOP = -1, TOP_RIGHT = 2, BOTTOM_RIGHT = 3, BOTTOM = 1, BOTTOM_LEFT = -2, TOP_LEFT = -3;
+
 		int relativePos = neighbourId - tileId;
-		
-		switch(relativePos) {
-		
+
+		switch (relativePos) {
+
 		case TOP:
 			return 0;
-		
+
 		case TOP_RIGHT:
 			return 1;
-			
+
 		case BOTTOM_RIGHT:
 			return 2;
-			
+
 		case BOTTOM:
 			return 3;
-			
+
 		case BOTTOM_LEFT:
 			return 4;
-			
+
 		case TOP_LEFT:
 			return 5;
-			
+
 		default:
 			return -1;
 		}
