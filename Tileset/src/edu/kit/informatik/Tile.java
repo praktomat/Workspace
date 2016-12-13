@@ -278,7 +278,36 @@ public class Tile {
      * 
      */
     public boolean hasSameColorsAs(Tile otherTile) {
-        return getNumberOfColors() == otherTile.getNumberOfColors();
+
+        boolean[] thisColors = getColors(this);
+        boolean[] otherColors = getColors(otherTile);
+
+        for (int i = 0; i < thisColors.length; i++) {
+            if (thisColors[i] != otherColors[i])
+                return false;
+        }
+        return true;
+    }
+    
+    /**
+     * Returns the available colors in Tile
+     * LineType at index 0 represents red
+     * LineType at index 1 represents green
+     * LineType at index 2 represents yellow
+     * @param tile
+     * @return boolean array of available colors
+     */
+    private boolean[] getColors(Tile tile) {
+        
+        // First element holds whether or not it's red, 
+        //second element green, third yellow
+        boolean[] colors = new boolean[3];
+        
+        colors[0] = tile.toString().contains("R");
+        colors[1] = tile.toString().contains("G");
+        colors[2] = tile.toString().contains("Y");
+        
+        return colors;
     }
 
     /**
@@ -288,7 +317,7 @@ public class Tile {
      * Example format: <blockquote>
      * 
      * <pre>
-     * -Y---Y
+     * -Y-- - Y
      * </pre>
      * 
      * </blockquote>

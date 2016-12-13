@@ -11,10 +11,7 @@ public class Main {
 				LineType.GREEN, LineType.NONE };
 		Tile tile2 = new Tile(lines2);
 
-		System.out.println(tile);
-		System.out.println(tile2);
-
-		System.out.println(connectsTo(tile, tile2, 1));
+		System.out.println(new int[]{1, 2, 3}.equals(new int[]{1, 2, 3}));
 	}
 
 	private static boolean connectsTo(Tile first, Tile second, int position) {
