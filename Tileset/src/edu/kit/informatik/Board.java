@@ -1,243 +1,276 @@
 package edu.kit.informatik;
 
+/**
+ * Represents a Board that can hold {@link Tiles}
+ * 
+ * @author Julien Midedji
+ *
+ */
 public class Board {
 
-  public static final int BOARD_SIZE = 12;
+	/**
+	 * Board can hold 12 Tiles total
+	 */
+	private static final int BOARD_SIZE = 12;
 
-  private Tile[] tiles;
-  private int MAX_TILE_EDGES = 6;
-  
-  public Board() {
+	/**
+	 * Tiles are hexagons and have 6 edges
+	 */
+	private int MAX_TILE_EDGES = 6;
 
-    tiles = new Tile[BOARD_SIZE];
+	private Tile[] tiles;
 
-    for (int i = 0; i < tiles.length; i++) {
-      tiles[i] = new Tile();
-    }
+	/**
+	 * Constructs an empty {@code Board}
+	 * 
+	 * @param lineTypes
+	 *            list of line positions
+	 * 
+	 */
+	public Board() {
 
-  }
+		tiles = new Tile[BOARD_SIZE];
 
-  /**
-   * Returns tile at given position
-   * 
-   * @param position
-   *          of Tile
-   * @return the Tile
-   */
-  public Tile getTile(int position) {
-    return tiles[position];
-  }
+		for (int i = 0; i < BOARD_SIZE; i++) {
+			tiles[i] = new Tile();
+		}
 
-  /**
-   * Changes the Tile at the given position
-   * 
-   * @param position
-   *          which Tile to change
-   * @param newTile
-   *          replacement of old Tile
-   */
-  public void setTile(int position, Tile newTile) {
-    tiles[position] = newTile;
-  }
+	}
 
-  /**
-   * Replaces Tile with an empty Tile
-   * 
-   * @param position
-   *          which Tile to change
-   */
-  public void removeTile(int position) {
-    tiles[position] = new Tile();
-  }
+	/**
+	 * Returns tile at given position
+	 * 
+	 * @param position
+	 *            of Tile
+	 * @return the Tile
+	 */
+	public Tile getTile(int position) {
+		return tiles[position];
+	}
 
-  /**
-   * Returns whether all Tiles are empty
-   * 
-   * @return true if all Tiles are empty
-   */
-  public boolean isEmpty() {
-    for (Tile tile : tiles) {
-      if (!tile.isEmpty())
-        return false;
-    }
-    return true;
-  }
+	/**
+	 * Changes the Tile at the given position
+	 * 
+	 * @param position
+	 *            which Tile to change
+	 * @param newTile
+	 *            replacement of old Tile
+	 */
+	public void setTile(int position, Tile newTile) {
+		tiles[position] = newTile;
+	}
 
-  /**
-   * Rotates Tile at position clockwise
-   * 
-   * @param position
-   *          what Tile to rotate
-   */
-  public void rotateTileClockwise(int position) {
-    tiles[position].rotateClockwise();
-  }
+	/**
+	 * Replaces Tile with an empty Tile
+	 * 
+	 * @param position
+	 *            which Tile to change
+	 */
+	public void removeTile(int position) {
+		tiles[position] = new Tile();
+	}
 
-  /**
-   * Rotates Tile at position counter-clockwise
-   * 
-   * @param position
-   *          what Tile to rotate
-   */
-  public void rotateTileCounterClockwise(int position) {
-    tiles[position].rotateCounterClockwise();
-  }
+	/**
+	 * Returns whether all Tiles are empty
+	 * 
+	 * @return true if all Tiles are empty
+	 */
+	public boolean isEmpty() {
+		for (Tile tile : tiles) {
+			if (!tile.isEmpty())
+				return false;
+		}
+		return true;
+	}
 
-  /**
-   * Returns the amount of colors on the board
-   * 
-   * @return
-   */
-  public int getNumberOfColors() {
+	/**
+	 * Rotates Tile at position clockwise
+	 * 
+	 * @param position
+	 *            what Tile to rotate
+	 */
+	public void rotateTileClockwise(int position) {
+		tiles[position].rotateClockwise();
+	}
 
-    String allTilesStringed = "";
-    int amount = 0;
+	/**
+	 * Rotates Tile at position counter-clockwise
+	 * 
+	 * @param position
+	 *            what Tile to rotate
+	 */
+	public void rotateTileCounterClockwise(int position) {
+		tiles[position].rotateCounterClockwise();
+	}
 
-    for (Tile tile : tiles) {
-      allTilesStringed += tile.toString();
-    }
+	/**
+	 * Returns the amount of colors on the board
+	 * 
+	 * @return total number of colors
+	 */
+	public int getNumberOfColors() {
 
-    if (allTilesStringed.contains("R"))
-      amount++;
+		String allTiles = "";
+		int amount = 0;
 
-    if (allTilesStringed.contains("G"))
-      amount++;
+		for (Tile tile : tiles)
+			allTiles += tile.toString();
 
-    if (allTilesStringed.contains("Y"))
-      amount++;
+		if (allTiles.contains("R"))
+			amount++;
 
-    return amount;
-  }
+		if (allTiles.contains("G"))
+			amount++;
 
-  /**
-   * Returns whether all Tiles on the board fit correctly
-   * 
-   * @return true if board is valid
-   */
-  public boolean isValid() {
+		if (allTiles.contains("Y"))
+			amount++;
 
-    // Iterate through all Tiles
-    for (int tileId = 0; tileId < tiles.length; tileId++) {
+		return amount;
+	}
 
-      int[] neighbour = getNeighbours(tileId);
+	/**
+	 * Returns whether all Tiles on the board fit correctly
+	 * 
+	 * @return true if board is valid
+	 */
+	public boolean isValid() {
 
-      // Iterate through all neighbours of tile
-      for (int position = 0; position < MAX_TILE_EDGES; position++) {
+		// Iterate through all Tiles
+		for (int tileId = 0; tileId < BOARD_SIZE; tileId++) {
 
-        // If there exists a neighbour, check if it fits
-        if (neighbour[position] != -1) {
+			int[] neighbour = getNeighbours(tileId);
 
-          if (!tiles[tileId].fitsTo(tiles[neighbour[position]], (position + 3) % 6))
-            return false;
+			// Iterate through all neighbors of tile
+			for (int position = 0; position < MAX_TILE_EDGES; position++) {
 
-        }
-      }
-    }
+				// If there exists a neighbor, check if it fits (-1 means invalid neighbour)
+				if (neighbour[position] != -1) {
 
-    return true;
-  }
+					if (!tiles[tileId].fitsTo(tiles[neighbour[position]], position))
+						return false;
 
-  private int[] getNeighbours(int tileId) {
+				}
+			}
+		}
 
-    int[] neighbours = new int[6];
+		return true;
+	}
 
-    // Make them all invalid
-    for (int i = 0; i < 6; i++) {
-      neighbours[i] = -1;
-    }
+	/**
+	 * Calculates all valid neighbours and returns
+	 * their position on the board (tileId) 
+	 * 
+	 * @param tileId
+	 * @return array of neighbour position, where -1 is an invalid neighbour
+	 */
+	private int[] getNeighbours(int tileId) {
+		
+		// Notation for invalid tiles
+		final int OUT_OF_BOUNDS = -1;
+		
+		// Store all neigbours of this Tile
+		int[] neighbourPos = new int[6];
 
-    // TODO: how do you explain this
-    neighbours[0] = tileId - 1; // top
-    neighbours[1] = tileId + 2; // top right
-    neighbours[2] = tileId + 3; // bottom right
-    neighbours[3] = tileId + 1; // bottom
-    neighbours[4] = tileId - 2; // bottom left
-    neighbours[5] = tileId - 3; // top left
+		// Then calculate all the valid neighbours
+		neighbourPos[0] = tileId - 1; // top
+		neighbourPos[1] = tileId + 2; // top right
+		neighbourPos[2] = tileId + 3; // bottom right
+		neighbourPos[3] = tileId + 1; // bottom
+		neighbourPos[4] = tileId - 2; // bottom left
+		neighbourPos[5] = tileId - 3; // top left
 
-    // no upper neighbour for 3, 6, 9...
-    if (tileId % 3 == 0) {
-      neighbours[0] = -1;
-      neighbours[1] = -1;
-    }
+		// No upper neighbours for 0, 3, 6, 9
+		if (tileId % 3 == 0) {
+			neighbourPos[0] = OUT_OF_BOUNDS;
+			neighbourPos[1] = OUT_OF_BOUNDS;
+		}
 
-    // no lower neighbour for 2, 5, 8, 11
-    if ((tileId - 2) % 3 == 0) {
-      neighbours[3] = -1;
-      neighbours[4] = -1;
-    }
+		// No lower neighbours for 2, 5, 8, 11
+		if ((tileId - 2) % 3 == 0) {
+			neighbourPos[3] = OUT_OF_BOUNDS;
+			neighbourPos[4] = OUT_OF_BOUNDS;;
+		}
 
-    // remove out of bounds entries
-    for (int i = 0; i < 6; i++) {
-      if (neighbours[i] > 11 || neighbours[i] < 0)
-        neighbours[i] = -1;
-    }
+		// No Tiles with tileID > 11 and < 0
+		for (int i = 0; i < 6; i++) {
+			if (neighbourPos[i] > 11 || neighbourPos[i] < 0)
+				neighbourPos[i] = OUT_OF_BOUNDS;
+		}
 
-    return neighbours;
-  }
+		return neighbourPos;
+	}
 
-  /**
-   * 
-   * @param positions
-   * @return
-   */
-  public LineType getConnectedPathColor(int[] positions) {
+	/**
+	 * 
+	 * @param positions
+	 * @return
+	 */
+	public LineType getConnectedPathColor(int[] positions) {
 
-    Tile firstTile = tiles[positions[0]];
-    Tile neighbourTile = tiles[positions[1]];
+		Tile first = tiles[positions[0]];
+		Tile neighbour = tiles[positions[1]];
 
-    for (int i = 0; i < positions.length - 1; i++) {
+		for (int i = 0; i < positions.length - 1; i++) {
 
-      boolean fits = firstTile.fitsTo(neighbourTile, neighbourPosition(positions[i], positions[i + 1]));
+			if (!first.fitsTo(neighbour, positionOfNeighbour(positions[i], positions[i + 1])))
+				return LineType.NONE;
 
-      if (!fits)
-        return LineType.NONE;
+		}
+		return first.getLineTypeAtIndex(positionOfNeighbour(positions[0], positions[1]));
+	}
 
-    }
-    return firstTile.getLineTypeAtIndex(neighbourPosition(positions[0], positions[1]));
-  }
+	/**
+	 * Calculates the position from two IDs 
+	 * 
+	 * @param tileId position of the neighbour relative to this tile
+	 * @param neighbourId the neighbour
+	 * @return the position
+	 */
+	private int positionOfNeighbour(int tileId, int neighbourId) {
 
-  private int neighbourPosition(int tileId, int neighbourId) {
+		// The difference of the tileIDs have a special meaning
+		final int TOP = -1, TOP_RIGHT = 2, BOTTOM_RIGHT = 3, 
+				BOTTOM = 1, BOTTOM_LEFT = -2, TOP_LEFT = -3;
+		
+		int relativePos = neighbourId - tileId;
+		
+		switch(relativePos) {
+		
+		case TOP:
+			return 0;
+		
+		case TOP_RIGHT:
+			return 1;
+			
+		case BOTTOM_RIGHT:
+			return 2;
+			
+		case BOTTOM:
+			return 3;
+			
+		case BOTTOM_LEFT:
+			return 4;
+			
+		case TOP_LEFT:
+			return 5;
+			
+		default:
+			return -1;
+		}
+	}
 
-    // bottom right
-    if (neighbourId - tileId == 3)
-      return 2;
+	@Override
+	public String toString() {
 
-    // top
-    if (neighbourId - tileId == -1)
-      return 0;
+		String word = "";
 
-    // top left
-    if (neighbourId - tileId == -3)
-      return 5;
+		for (int tileId = 0; tileId < BOARD_SIZE; tileId++) {
+			word += tiles[tileId].toString() + ";";
 
-    // bottom left
-    if (neighbourId - tileId == -2)
-      return 4; // TODO something like 4 is "BOTTOM_LEFT_POSITION" final
-                // variable
-
-    // top right
-    if (neighbourId - tileId == 2)
-      return 1;
-
-    // top
-    if (neighbourId - tileId == 1)
-      return 0;
-
-    return Integer.MIN_VALUE;
-  }
-
-  @Override
-  public String toString() {
-
-    String word = "";
-
-    for (int tileId = 0; tileId < BOARD_SIZE; tileId++) {
-      word += tiles[tileId].toString() + ";";
-
-      if ((tileId + 1) % 3 == 0 && tileId != 0)
-        word += "\n";
-    }
-    return word;
-  }
+			if ((tileId + 1) % 3 == 0 && tileId != 0)
+				word += "\n";
+		}
+		return word;
+	}
 
 }
