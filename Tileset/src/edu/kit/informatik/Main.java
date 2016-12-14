@@ -13,7 +13,7 @@ public class Main {
     
     public static void main(String[] args) throws FileNotFoundException {
 
-		PrintWriter out = new PrintWriter("testRotation.txt");
+		PrintWriter out = new PrintWriter("testfitsTo.txt");
 
 		strings = new ArrayList<>();
 		list = new ArrayList<>();
@@ -45,8 +45,18 @@ public class Main {
 		    
     		    Tile tile = list.get(i);
     		    Tile tile2 = list.get(k);
-    		    if(tile.isRotationEqualTo(tile2))
-    		        out.println((tile + " rotation " + tile2 + " | " + tile.isRotationEqualTo(tile2)));
+
+    		    for(int h = 0; h < 6; h++) {
+    		        if(tile.fitsTo(tile2, h))
+    		            out.println((tile + " fitsTo " + tile2 + " at " + h));
+    		    }
+    		    
+    		    //if(tile.isRotationEqualTo(tile2))
+    		      //  out.println((tile + " rotation " + tile2 + " | " + tile.isRotationEqualTo(tile2)));
+    		    
+    		    // Test empty
+    		    //if(tile.isEmpty())
+                    //out.println((tile + " is Empty | " + tile));
 		    }
 		}
 		
