@@ -189,18 +189,48 @@ public class Tile {
         LineType[] colors = new LineType[] { LineType.RED, LineType.GREEN, LineType.YELLOW };
 
         // Iterate through all possibilites of recoloring
-        Tile[] permutations = new Tile[11];
+        Tile[] permutations = new Tile[27];
 
-        // Swap two colors
+        // Create all possibilites
+        /*
+         * Warning: These do not only create duplicates but they generate
+         * invalid linetype arrangements however these are harmless, as we can
+         * expect only valid inputs.
+         */
         for (int i = 0; i < colors.length; i++) {
-            for (int j = 0; j < colors.length; j++)
-                permutations[3 * i + j] = this.recolor(colors[i], colors[j]);
+            for (int j = 0; j < colors.length; j++) {
+                for (int k = 0; k < colors.length; k++) {
+
+                    Tile recolor = this.copy();
+
+                    // Switch colors
+                    for (int position = 0; position < MAX_TILE_EDGES; position++) {
+
+                        // When indices are 0,1,2 then change to
+                        // red,green,yellow accordingly
+                        switch (recolor.lineTypes[position]) {
+
+                        case RED:
+                            recolor.lineTypes[position] = colors[i];
+                            break;
+
+                        case GREEN:
+                            recolor.lineTypes[position] = colors[j];
+                            break;
+
+                        case YELLOW:
+                            recolor.lineTypes[position] = colors[k];
+                            break;
+
+                        default:
+                            break;
+                        }
+                    }
+
+                    permutations[9 * i + 3 * j + k] = recolor;
+                }
+            }
         }
-
-        // Change A -> B and B -> C
-        permutations[9] = this.recolor(colors[0], colors[1]).recolor(colors[0], colors[2]);
-        permutations[10] = this.recolor(colors[0], colors[2]).recolor(colors[0], colors[1]);
-
         // Check if there is a possible recolor
         for (Tile recolor : permutations) {
             if (recolor.isExactlyEqualTo(otherTile))
@@ -208,29 +238,6 @@ public class Tile {
         }
 
         return false;
-    }
-
-    /**
-     * Recolors Tile from swaps color1 and color2 respectively
-     * 
-     * @param color1
-     *            the first color
-     * @param color2
-     *            the second color
-     * @return Tile with swapped colors
-     */
-    private Tile recolor(LineType color1, LineType color2) {
-
-        Tile copy = this.copy();
-
-        for (int i = 0; i < MAX_TILE_EDGES; i++) {
-            if (copy.lineTypes[i] == color1)
-                copy.lineTypes[i] = color2;
-            else if (copy.lineTypes[i] == color2)
-                copy.lineTypes[i] = color1;
-        }
-
-        return copy;
     }
 
     /**
@@ -292,25 +299,25 @@ public class Tile {
         }
         return true;
     }
-    
+
     /**
-     * Returns the available colors in Tile
-     * LineType at index 0 represents red
-     * LineType at index 1 represents green
-     * LineType at index 2 represents yellow
+     * Returns the available colors in Tile LineType at index 0 represents red
+     * LineType at index 1 represents green LineType at index 2 represents
+     * yellow
+     * 
      * @param tile
      * @return boolean array of available colors
      */
     private boolean[] getColors(Tile tile) {
-        
-        // First element holds whether or not it's red, 
-        //second element green, third yellow
+
+        // First element holds whether or not it's red,
+        // second element green, third yellow
         boolean[] colors = new boolean[3];
-        
+
         colors[0] = tile.toString().contains("R");
         colors[1] = tile.toString().contains("G");
         colors[2] = tile.toString().contains("Y");
-        
+
         return colors;
     }
 
@@ -321,7 +328,7 @@ public class Tile {
      * Example format: <blockquote>
      * 
      * <pre>
-     * -Y-- - Y
+     * -Y---Y
      * </pre>
      * 
      * </blockquote>

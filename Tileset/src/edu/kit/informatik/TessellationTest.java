@@ -206,7 +206,6 @@ public class TessellationTest {
     test(b4.getConnectedPathColor(new int[]{4, 5, 7}) == LineType.GREEN, "Board 5 getConnectedPathColor on tile 4, 5 and 7 is GREEN", "Wrong color, must be GREEN");
     test(b4.getConnectedPathColor(new int[]{4, 5, 7, 6, 4, 5, 7}) == LineType.NONE, "Board 5 getConnectedPathColor on tile 4, 5, 7, 6, 4, 5 and 7 is NONE", "Wrong color, must be NONE");
     test(b4.getConnectedPathColor(new int[]{8, 10, 11}) == LineType.YELLOW, "Board 5 getConnectedPathColor on tile 8, 10 and 11 is YELLOW", "Wrong color, must be YELLOW");
-    System.out.println(b4.getConnectedPathColor(new int[]{8, 10, 11, 8}));
     test(b4.getConnectedPathColor(new int[]{8, 10, 11, 8}) == LineType.NONE, "Board 5 getConnectedPathColor on tile 8, 10, 11 and 8 is NONE", "Wrong color, must be NONE");
 
 

@@ -1,20 +1,92 @@
 package edu.kit.informatik;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 public class Main {
-	public static void main(String[] args) {
+	
+    static ArrayList<String> strings;
+    static ArrayList<Tile> list;
+    
+    public static void main(String[] args) throws FileNotFoundException {
 
-		LineType[] lines = new LineType[] { LineType.RED, LineType.YELLOW, LineType.GREEN, LineType.GREEN, LineType.RED,
-				LineType.YELLOW };
-		Tile tile = new Tile(lines);
+		PrintWriter out = new PrintWriter("testRotation.txt");
 
-		LineType[] lines2 = new LineType[] { LineType.RED, LineType.NONE, LineType.GREEN, LineType.GREEN,
-				LineType.RED, LineType.NONE };
-		Tile tile2 = new Tile(lines2);
-
-		tile.canBeRecoloredTo(tile2);
+		strings = new ArrayList<>();
+		list = new ArrayList<>();
 		
-		System.out.println(" ---- ");
+		permutation("RRGGYY");
+		permutation("RRGG--");
+		permutation("RRYY--");
+		permutation("GGYY--");
+		permutation("RR----");
+		permutation("GG----");
+		permutation("YY----");
+		permutation("------");
 		
-		tile2.canBeRecoloredTo(tile2);
+		// list is some List of Strings
+		Set<String> s = new LinkedHashSet<>(strings);
+		strings.clear();
+		strings.addAll(s);
+		
+		for(int i = 0; i < strings.size(); i++) {
+		    generateTile(strings.get(i));
+		}
+		
+		// add elements to al, including duplicates
+		
+		// ====================== TESTING
+		
+		for(int i = 0; i < list.size(); i++) {
+		    for(int k = 0; k < list.size(); k++) {
+		    
+    		    Tile tile = list.get(i);
+    		    Tile tile2 = list.get(k);
+    		    if(tile.isRotationEqualTo(tile2))
+    		        out.println((tile + " rotation " + tile2 + " | " + tile.isRotationEqualTo(tile2)));
+		    }
+		}
+		
+		out.close();
+		System.out.println("finished");
+	}
+	
+	public static void permutation(String str) { 
+	    permutation("", str); 
+	}
+
+	private static void permutation(String prefix, String str) {
+	    int n = str.length();
+	    if (n == 0) strings.add(prefix);
+	    else {
+	        for (int i = 0; i < n; i++)
+	            permutation(prefix + str.charAt(i), str.substring(0, i) + str.substring(i+1, n));
+	    }
+	}
+	
+	public static void generateTile(String str) {
+	    
+	    LineType[] lines = new LineType[6];
+	    
+	    for(int i = 0; i < 6; i++) {
+	        
+	        if(str.charAt(i) == LineType.RED.getAbbreviation())
+	            lines[i] = LineType.RED;
+	            
+            if(str.charAt(i) == LineType.GREEN.getAbbreviation())
+                lines[i] = LineType.GREEN;
+                
+            if(str.charAt(i) == LineType.YELLOW.getAbbreviation())
+                lines[i] = LineType.YELLOW;
+            
+            if(str.charAt(i) == LineType.NONE.getAbbreviation())
+                lines[i] = LineType.NONE;
+	        
+	    }
+	    
+	    list.add(new Tile(lines));
 	}
 }

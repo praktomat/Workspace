@@ -100,6 +100,8 @@ public class Test {
     Tile rrRotated = new Tile(new LineType[]{LineType.NONE, LineType.RED, LineType.RED, LineType.NONE, LineType.NONE, LineType.NONE});
     assertFalse(rrRotated.canBeRecoloredTo(rr));
     assertFalse(rr.canBeRecoloredTo(rrRotated));
+    
+    //
   }
   
   @org.junit.Test
@@ -112,7 +114,7 @@ public class Test {
   @org.junit.Test
   // A2.13
   public void testHasSameColorsAs() {
-    
+    assertTrue(new Tile().hasSameColorsAs(new Tile()));
   }
   
   @org.junit.Test
