@@ -8,15 +8,15 @@ package edu.kit.informatik;
  *
  * @param <T> Variable type to sort
  */
-class LinkedSortedAppendList<T extends Comparable<T>> implements SortedAppendList {
+class LinkedSortedAppendList<T extends Comparable<T>> implements SortedAppendList<T> {
 
-	private Cell first;
+	private Cell head;
 
 	/**
 	 * Initialize empty List
 	 */
 	LinkedSortedAppendList() {
-		first = null;
+		head = null;
 	}
 
 	/**
@@ -27,10 +27,10 @@ class LinkedSortedAppendList<T extends Comparable<T>> implements SortedAppendLis
 	 * @param <T> type of value
 	 */
 	private class Cell {
-		private Comparable content;
+		private T content;
 		private Cell next;
 
-		private Cell(Comparable content, Cell next) {
+		private Cell(T content, Cell next) {
 			this.content = content;
 			this.next = next;
 		}
@@ -40,7 +40,7 @@ class LinkedSortedAppendList<T extends Comparable<T>> implements SortedAppendLis
 	 * An Iterator can cycle through the list
 	 *
 	 */
-	private class Iterator implements SortedIterator {
+	private class Iterator implements SortedIterator<T> {
 
 		private int pointer;
 
@@ -59,7 +59,7 @@ class LinkedSortedAppendList<T extends Comparable<T>> implements SortedAppendLis
 		}
 
 		@Override
-		public Comparable next() {
+		public T next() {
 
 			Cell current = getElement(pointer);
 
@@ -83,7 +83,7 @@ class LinkedSortedAppendList<T extends Comparable<T>> implements SortedAppendLis
 	 * @return Element at position
 	 */
 	private Cell getElement(int index) {
-		Cell current = first;
+		Cell current = head;
 
 		for (int i = 0; i < index; i++)
 			current = current.next;
@@ -97,19 +97,19 @@ class LinkedSortedAppendList<T extends Comparable<T>> implements SortedAppendLis
 	 * @param element to add
 	 */
 	@Override
-	public void addSorted(Comparable element) {
+	public void addSorted(T element) {
 		
 		// Create new element 
 		Cell newCell = new Cell(element, null);
 		
 		// Pointer element
-		Cell current = first;
+		Cell current = head;
 
-		// Initialize first element
+		// Initialize head element
 		if (current == null) {
-			first = newCell;
+			head = newCell;
 
-		// Initialize elements after first
+		// Initialize elements after head  was initialized
 		} else {
 			while (current.next != null)
 				current = current.next;
@@ -118,15 +118,15 @@ class LinkedSortedAppendList<T extends Comparable<T>> implements SortedAppendLis
 	}
 
 	@Override
-	public SortedIterator iterator() {
+	public SortedIterator<T> iterator() {
 		return new Iterator();
 	}
 
 	@Override
 	public String toString() { // TODO: Remove
-		String str = first.content.toString();
+		String str = head.content.toString();
 
-		Cell current = first; // TODO: nice name
+		Cell current = head; // TODO: nice name
 
 		while (current.next != null) {
 			current = current.next;

@@ -4,7 +4,7 @@ public class Main {
 	public static void main(String[] args) {
 		LinkedSortedAppendList<Integer> list = new LinkedSortedAppendList<Integer>();
 		
-		list.addSorted("a");
+		list.addSorted(3);
 		list.addSorted(2);
 		list.addSorted(2);
 		
