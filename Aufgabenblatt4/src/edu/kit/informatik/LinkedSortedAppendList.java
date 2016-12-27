@@ -6,10 +6,14 @@ package edu.kit.informatik;
  * 
  * @author Julien Midedji
  *
- * @param <T> Variable type to sort
+ * @param <T>
+ *            Variable type to sort
  */
 class LinkedSortedAppendList<T extends Comparable<T>> implements SortedAppendList<T> {
 
+	/**
+	 * Starting element
+	 */
 	private Cell head;
 
 	/**
@@ -21,18 +25,40 @@ class LinkedSortedAppendList<T extends Comparable<T>> implements SortedAppendLis
 
 	/**
 	 * 
-	 * A Cell represents a single element in the
-	 * list holding the value and a reference to the next element
+	 * A Cell represents a single element in the list holding the value and a
+	 * reference to the next element
 	 *
-	 * @param <T> type of value
+	 * @param <T>
+	 *            type of value
 	 */
 	private class Cell {
 		private T content;
+		private Cell prev;
 		private Cell next;
 
-		private Cell(T content, Cell next) {
+		private Cell(T content, Cell prev, Cell next) {
 			this.content = content;
+			this.prev = prev;
 			this.next = next;
+		}
+		
+		@Override
+		public String toString() { //TODO: Remove
+			
+			String nextStr;
+			String prevStr;
+			
+			if(next == null)
+				nextStr = "null";
+			else
+				nextStr = next.content.toString();
+			
+			if(prev == null)
+				prevStr = "null";
+			else
+				prevStr = prev.content.toString();
+			
+			return "[<< " + prevStr + " << | " + content.toString() + " | >> " + nextStr + " >>]";
 		}
 	}
 
@@ -76,10 +102,10 @@ class LinkedSortedAppendList<T extends Comparable<T>> implements SortedAppendLis
 	}
 
 	/**
-	 * Returns the element at the specific position
-	 * in the list
+	 * Returns the element at the specific position in the list
 	 * 
-	 * @param index Position of element
+	 * @param index
+	 *            Position of element
 	 * @return Element at position
 	 */
 	private Cell getElement(int index) {
@@ -94,26 +120,72 @@ class LinkedSortedAppendList<T extends Comparable<T>> implements SortedAppendLis
 	/**
 	 * Adds an element to list in correct order
 	 * 
-	 * @param element to add
+	 * @param element
+	 *            to add
 	 */
 	@Override
 	public void addSorted(T element) {
-		
-		// Create new element 
-		Cell newCell = new Cell(element, null);
-		
+
 		// Pointer element
 		Cell current = head;
 
 		// Initialize head element
 		if (current == null) {
-			head = newCell;
+			head = new Cell(element, null, null);
 
-		// Initialize elements after head  was initialized
+			// Initialize elements after head was initialized
 		} else {
-			while (current.next != null)
+
+			// Iterate through list until
+			while(current.next != null) {
+				
+				// When new element is lower, put it in
+				if (element.compareTo(current.content) < 0) {
+	
+					// Special case: New element needs to be head
+					// Need to change head element
+					if (current == head) {
+						Cell temp = head;
+						head = new Cell(element, null, temp);
+	
+					// Change chain of cells
+					} else {
+						Cell newElement = new Cell(element, current.prev, current.next);
+						current.prev.next = newElement;
+						current.next.prev = newElement; // TODO: Yup :P
+					}
+				}
+				
+				// When new element is higher, continue down the list
+				if(element.compareTo(current.content) >= 0) {
+					current = current.next;
+				}
+			}
+			
+			// Reached end
+			if(current.next == null)
+				current.next = new Cell(element, current, null);
+
+			/*// Create new element
+			Cell newCell = new Cell(element, null, null);
+			
+			while (current.next != null) {
+
+				System.out.println("CHECKING: " + element.toString() + " with " + current.content.toString());
+
+				if (element.compareTo(current.content) < 0)
+					System.out.println("LOWER");
+
+				if (element.compareTo(current.content) == 0)
+					System.out.println("SAME");
+
+				if (element.compareTo(current.content) > 0)
+					System.out.println("HIGHER");
+
 				current = current.next;
-			current.next = newCell;
+			}
+
+			current.next = newCell;*/
 		}
 	}
 
