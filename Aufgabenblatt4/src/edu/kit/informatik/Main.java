@@ -5,9 +5,8 @@ public class Main {
 		LinkedSortedAppendList<Integer> list = new LinkedSortedAppendList<Integer>();
 		
 		list.addSorted(2);
-		list.addSorted(5);
-		list.addSorted(3);
 		list.addSorted(1);
+
 		
 		SortedIterator iterator = list.iterator();
 		

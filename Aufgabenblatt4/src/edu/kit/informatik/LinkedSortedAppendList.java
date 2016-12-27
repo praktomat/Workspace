@@ -41,23 +41,23 @@ class LinkedSortedAppendList<T extends Comparable<T>> implements SortedAppendLis
 			this.prev = prev;
 			this.next = next;
 		}
-		
+
 		@Override
-		public String toString() { //TODO: Remove
-			
+		public String toString() { // TODO: Remove
+
 			String nextStr;
 			String prevStr;
-			
-			if(next == null)
+
+			if (next == null)
 				nextStr = "null";
 			else
 				nextStr = next.content.toString();
-			
-			if(prev == null)
+
+			if (prev == null)
 				prevStr = "null";
 			else
 				prevStr = prev.content.toString();
-			
+
 			return "[<< " + prevStr + " << | " + content.toString() + " | >> " + nextStr + " >>]";
 		}
 	}
@@ -129,6 +129,8 @@ class LinkedSortedAppendList<T extends Comparable<T>> implements SortedAppendLis
 		// Pointer element
 		Cell current = head;
 
+		boolean added = false;
+
 		// Initialize head element
 		if (current == null) {
 			head = new Cell(element, null, null);
@@ -136,56 +138,44 @@ class LinkedSortedAppendList<T extends Comparable<T>> implements SortedAppendLis
 			// Initialize elements after head was initialized
 		} else {
 
-			// Iterate through list until
-			while(current.next != null) {
-				
-				// When new element is lower, put it in
-				if (element.compareTo(current.content) < 0) {
-	
-					// Special case: New element needs to be head
-					// Need to change head element
-					if (current == head) {
-						Cell temp = head;
-						head = new Cell(element, null, temp);
-	
-					// Change chain of cells
-					} else {
-						Cell newElement = new Cell(element, current.prev, current.next);
-						current.prev.next = newElement;
-						current.next.prev = newElement; // TODO: Yup :P
-					}
+			// Special case: New element needs to be before head
+			// Need to change head element
+			if (element.compareTo(current.content) < 0) {
+				Cell temp = head;
+				Cell newElement = new Cell(element, null, temp);
+				temp.prev = newElement;
+				head = newElement;
+				added = true;
+			}
+			
+			// Iterate through list until end reached
+			while (current.next != null && !added) {
+
+				// When new element is lower than current neighbour, 
+				// put it in between
+				if (element.compareTo(current.next.content) < 0) {
+
+					Cell newElement = new Cell(element, current, current.next);
+						
+					// Right neighbour of newCell has to point on newCell
+					newElement.next.prev = newElement; 
+					
+					// Left neighbour of newCell has to point on newCell
+					current.next = newElement; 
+					added = true;
+					break;
 				}
-				
-				// When new element is higher, continue down the list
-				if(element.compareTo(current.content) >= 0) {
+
+				// When new element is equal or higher, continue down the list
+				else if (element.compareTo(current.content) >= 0) {
 					current = current.next;
 				}
 			}
-			
-			// Reached end
-			if(current.next == null)
+
+			// Reached end but not yet added to list: put at the end
+			if (!added) {
 				current.next = new Cell(element, current, null);
-
-			/*// Create new element
-			Cell newCell = new Cell(element, null, null);
-			
-			while (current.next != null) {
-
-				System.out.println("CHECKING: " + element.toString() + " with " + current.content.toString());
-
-				if (element.compareTo(current.content) < 0)
-					System.out.println("LOWER");
-
-				if (element.compareTo(current.content) == 0)
-					System.out.println("SAME");
-
-				if (element.compareTo(current.content) > 0)
-					System.out.println("HIGHER");
-
-				current = current.next;
 			}
-
-			current.next = newCell;*/
 		}
 	}
 
