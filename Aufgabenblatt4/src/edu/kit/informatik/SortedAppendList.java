@@ -10,7 +10,7 @@ package edu.kit.informatik;
 interface SortedAppendList<T extends Comparable<T>> {
 
 	/**
-	 * Adds an element to list
+	 * Adds an element to list so that its correctly ordered
 	 * 
 	 * @param element to add
 	 */
@@ -19,7 +19,7 @@ interface SortedAppendList<T extends Comparable<T>> {
 	/**
 	 * Returns a new iterator for the list
 	 * 
-	 * @return iterator
+	 * @return The iterator to cycle through list
 	 */
 	SortedIterator<T> iterator();
 	

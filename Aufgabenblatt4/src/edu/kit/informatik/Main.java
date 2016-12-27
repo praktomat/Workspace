@@ -4,7 +4,7 @@ public class Main {
 	public static void main(String[] args) {
 		LinkedSortedAppendList<Integer> list = new LinkedSortedAppendList<Integer>();
 		
-		list.addSorted(5);
+		list.addSorted("a");
 		list.addSorted(2);
 		list.addSorted(2);
 		
@@ -16,3 +16,5 @@ public class Main {
 		System.out.println(iterator.next());
 	}
 }
+
+// TODO: Check how to write javadoc for interfaces and inner classes
