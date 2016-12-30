@@ -1,18 +1,15 @@
 package edu.kit.informatik;
 
 /**
- * 
  * Creates a linked list that is sorted
  * 
  * @author Julien Midedji
- *
- * @param <T>
- *            Variable type to sort
+ * @param <T> The variable type to sort
  */
 class LinkedSortedAppendList<T extends Comparable<T>> implements SortedAppendList<T> {
 
 	/**
-	 * Starting element
+	 * First entry in list
 	 */
 	private Cell head;
 
@@ -24,12 +21,10 @@ class LinkedSortedAppendList<T extends Comparable<T>> implements SortedAppendLis
 	}
 
 	/**
-	 * 
 	 * A Cell represents a single element in the list holding the value and a
-	 * reference to the next element
+	 * reference to its neighbour cells
 	 *
-	 * @param <T>
-	 *            type of value
+	 * @param <T> type of value
 	 */
 	private class Cell {
 		private T content;
@@ -63,8 +58,8 @@ class LinkedSortedAppendList<T extends Comparable<T>> implements SortedAppendLis
 	}
 
 	/**
-	 * An Iterator can cycle through the list
-	 *
+	 * An Iterator can cycle through the list and
+	 * return its content
 	 */
 	private class Iterator implements SortedIterator<T> {
 
@@ -76,12 +71,7 @@ class LinkedSortedAppendList<T extends Comparable<T>> implements SortedAppendLis
 
 		@Override
 		public boolean hasNext() {
-			Cell current = getElement(pointer);
-
-			if (current.next != null)
-				return true;
-			else
-				return false;
+			return getElement(pointer) != null;
 		}
 
 		@Override

@@ -1,7 +1,6 @@
 package edu.kit.informatik;
 
 /**
- * 
  * An interface for Objects that implement a flexible sorted list.
  * 
  * @author Julien Midedji
