@@ -1,4 +1,4 @@
-package edu.kit.informatik;
+package edu.kit.sortedlist;
 
 /**
  * An interface for Objects that implement a flexible sorted list.

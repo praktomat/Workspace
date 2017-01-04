@@ -1,4 +1,4 @@
-package edu.kit.informatik;
+package edu.kit.sortedlist;
 
 public class Main {
 	public static void main(String[] args) {

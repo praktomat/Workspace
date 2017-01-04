@@ -1,8 +1,8 @@
-package edu.kit.informatik;
+package edu.kit.sortedlist;
 
 import static org.junit.Assert.*;
 
-public class Test {
+public class SortedListTest {
 
 	// A.2
 	@org.junit.Test

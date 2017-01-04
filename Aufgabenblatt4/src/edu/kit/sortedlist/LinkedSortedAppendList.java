@@ -1,4 +1,4 @@
-package edu.kit.informatik;
+package edu.kit.sortedlist;
 
 /**
  * Creates a linked list that is sorted
