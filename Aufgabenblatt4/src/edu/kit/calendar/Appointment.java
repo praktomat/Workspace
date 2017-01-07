@@ -157,17 +157,36 @@ public final class Appointment implements Comparable<Appointment>{
 	@Override
 	public int compareTo(Appointment o) {
 		
-		if(this.from.isBefore(o.from)
-			|| this.to.isBefore(o.to)
-			|| this.name.compareTo(o.name) < 0)
-				return -1;
-		
-		if(this.from.isEqual(o.from)
-			&& this.to.isEqual(o.to)
-			&& this.name.compareTo(o.name) == 0)
-				return 0;
-		
-		
-		return 1;
+	    if(!this.from.isEqual(o.from))
+	        return this.from.isBefore(o.from) ? -1 : 1;
+
+	    // Starts are equal so check end dates
+	    else {
+	        if(!this.to.isEqual(o.to))
+	            return this.to.isBefore(o.to) ? -1 : 1;
+	        
+	        // Starts and Ends are equal so check name
+	        else{
+	            
+	            if(this.name.compareTo(o.name) != 0)
+	                return this.name.compareTo(o.name);
+
+	            // Everything's the same
+	            else
+	                return 0;
+	        }   
+	    }
 	}
 }
+
+/*
+if(this.from.isBefore(o.from)
+|| this.to.isBefore(o.to)
+|| this.name.compareTo(o.name) < 0)
+    return -1;
+
+if(this.from.isEqual(o.from)
+&& this.to.isEqual(o.to)
+&& this.name.compareTo(o.name) == 0)
+    return 0;
+*/

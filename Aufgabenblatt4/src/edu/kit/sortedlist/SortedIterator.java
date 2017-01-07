@@ -6,8 +6,9 @@ package edu.kit.sortedlist;
  * @author Julien Midedji
  * @param <T> Type of values that are returned
  */
-interface SortedIterator<T extends Comparable<T>> {
-
+public interface SortedIterator<T extends Comparable<T>> {
+    // TODO: Stay public?
+    
 	/**
 	 * @return Returns true if the list contains more elements ahead
 	 */

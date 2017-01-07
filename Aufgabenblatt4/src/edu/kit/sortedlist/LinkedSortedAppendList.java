@@ -6,8 +6,10 @@ package edu.kit.sortedlist;
  * @author Julien Midedji
  * @param <T> The variable type to sort
  */
-class LinkedSortedAppendList<T extends Comparable<T>> implements SortedAppendList<T> {
-
+public class LinkedSortedAppendList<T extends Comparable<T>> implements SortedAppendList<T> {
+    
+    // ^TODO: make not public?
+    
 	/**
 	 * First entry in list
 	 */
@@ -16,7 +18,8 @@ class LinkedSortedAppendList<T extends Comparable<T>> implements SortedAppendLis
 	/**
 	 * Initialize empty List
 	 */
-	LinkedSortedAppendList() {
+	// TODO: stay public?
+	public LinkedSortedAppendList() {
 		head = null;
 	}
 
