@@ -13,3 +13,6 @@ public class Main {
 }
 
 // C.1.2 done
+// C.1.3 done
+// ...
+// C.1.7 done
