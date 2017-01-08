@@ -5,6 +5,8 @@ import org.junit.Test;
 
 import edu.kit.calendar.Date;
 // modify as needed
+import iterator.FixedDeltaDateIterator;
+import iterator.UnionSortedIterator;
 
 
 /**
@@ -14,7 +16,7 @@ import edu.kit.calendar.Date;
  * @author Micha Hanselmann
  * @version 1.0.0
  */
-/*public class IteratorTest {
+public class IteratorTest {
 
     @Test
     public void testExample3Top() {
@@ -38,7 +40,7 @@ import edu.kit.calendar.Date;
                 "01-02-2027",
                 "11-06-2030"
         }, results.toArray(new String[results.size()]));
-        
+        // TODO: more tests
     }
 
     @Test
@@ -79,4 +81,4 @@ import edu.kit.calendar.Date;
         
     }
 
-}*/
+}
