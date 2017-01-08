@@ -36,7 +36,7 @@ public class SortedListTest {
             results.add(iterator.next());
         
         // check sorting of list
-        assertArrayEquals(new Integer[] { 1, 2, 3, 5 }, results.toArray(new Integer[results.size()]));
+        assertArrayEquals(new Integer[] {1, 2, 3, 5 }, results.toArray(new Integer[results.size()]));
         
     }
     

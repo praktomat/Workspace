@@ -7,16 +7,16 @@ public class UnionSortedIterator<T extends Comparable<T>> implements SortedItera
 
     private LinkedSortedAppendList<T> combination;
     private SortedIterator<T> iterator;
-    
+
     public UnionSortedIterator(SortedIterator<T> iteratorA, SortedIterator<T> iteratorB) {
         combination = new LinkedSortedAppendList<>();
-        
-        while(iteratorA.hasNext())
+
+        while (iteratorA.hasNext())
             combination.addSorted(iteratorA.next());
-        
-        while(iteratorB.hasNext())
+
+        while (iteratorB.hasNext())
             combination.addSorted(iteratorB.next());
-        
+
         iterator = combination.iterator();
     }
 

@@ -4,190 +4,191 @@ package edu.kit.sortedlist;
  * Creates a linked list that is sorted
  * 
  * @author Julien Midedji
- * @param <T> The variable type to sort
+ * @param <T>
+ *            The variable type to sort
  */
 public class LinkedSortedAppendList<T extends Comparable<T>> implements SortedAppendList<T> {
-    
+
     // ^TODO: make not public?
-    
-	/**
-	 * First entry in list
-	 */
-	private Cell head;
 
-	/**
-	 * Initialize empty List
-	 */
-	// TODO: stay public?
-	public LinkedSortedAppendList() {
-		head = null;
-	}
+    /**
+     * First entry in list
+     */
+    private Cell head;
 
-	/**
-	 * A Cell represents a single element in the list holding the value and a
-	 * reference to its neighbour cells
-	 *
-	 * @param <T> type of value
-	 */
-	private class Cell {
-		private T content;
-		private Cell prev;
-		private Cell next;
+    /**
+     * Initialize empty List
+     */
+    // TODO: stay public?
+    public LinkedSortedAppendList() {
+        head = null;
+    }
 
-		private Cell(T content, Cell prev, Cell next) {
-			this.content = content;
-			this.prev = prev;
-			this.next = next;
-		}
+    /**
+     * A Cell represents a single element in the list holding the value and a
+     * reference to its neighbour cells
+     *
+     * @param <T>
+     *            type of value
+     */
+    private class Cell {
+        private T content;
+        private Cell prev;
+        private Cell next;
 
-		@Override
-		public String toString() { // TODO: Remove
+        private Cell(T content, Cell prev, Cell next) {
+            this.content = content;
+            this.prev = prev;
+            this.next = next;
+        }
 
-			String nextStr;
-			String prevStr;
+        @Override
+        public String toString() { // TODO: Remove
 
-			if (next == null)
-				nextStr = "null";
-			else
-				nextStr = next.content.toString();
+            String nextStr;
+            String prevStr;
 
-			if (prev == null)
-				prevStr = "null";
-			else
-				prevStr = prev.content.toString();
+            if (next == null)
+                nextStr = "null";
+            else
+                nextStr = next.content.toString();
 
-			return "[<< " + prevStr + " << | " + content.toString() + " | >> " + nextStr + " >>]";
-		}
-	}
+            if (prev == null)
+                prevStr = "null";
+            else
+                prevStr = prev.content.toString();
 
-	/**
-	 * An Iterator can cycle through the list and
-	 * return its content
-	 */
-	private class Iterator implements SortedIterator<T> {
+            return "[<< " + prevStr + " << | " + content.toString() + " | >> " + nextStr + " >>]";
+        }
+    }
 
-		private int pointer;
+    /**
+     * An Iterator can cycle through the list and return its content
+     */
+    private class Iterator implements SortedIterator<T> {
 
-		private Iterator() {
-			pointer = 0;
-		}
+        private int pointer;
 
-		@Override
-		public boolean hasNext() {
-			return getElement(pointer) != null;
-		}
+        private Iterator() {
+            pointer = 0;
+        }
 
-		@Override
-		public T next() {
+        @Override
+        public boolean hasNext() {
+            return getElement(pointer) != null;
+        }
 
-			Cell current = getElement(pointer);
+        @Override
+        public T next() {
 
-			if (current == null) {
-				System.out.println("No such element");
-				return null;
-			}
+            Cell current = getElement(pointer);
 
-			pointer++;
-			return current.content;
+            if (current == null) {
+                System.out.println("No such element");
+                return null;
+            }
 
-		}
+            pointer++;
+            return current.content;
 
-	}
+        }
 
-	/**
-	 * Returns the element at the specific position in the list
-	 * 
-	 * @param index
-	 *            Position of element
-	 * @return Element at position
-	 */
-	private Cell getElement(int index) {
-		Cell current = head;
+    }
 
-		for (int i = 0; i < index; i++)
-			current = current.next;
+    /**
+     * Returns the element at the specific position in the list
+     * 
+     * @param index
+     *            Position of element
+     * @return Element at position
+     */
+    private Cell getElement(int index) {
+        Cell current = head;
 
-		return current;
-	}
+        for (int i = 0; i < index; i++)
+            current = current.next;
 
-	/**
-	 * Adds an element to list in correct order
-	 * 
-	 * @param element
-	 *            to add
-	 */
-	@Override
-	public void addSorted(T element) {
+        return current;
+    }
 
-		// Pointer element
-		Cell current = head;
+    /**
+     * Adds an element to list in correct order
+     * 
+     * @param element
+     *            to add
+     */
+    @Override
+    public void addSorted(T element) {
 
-		boolean added = false;
+        // Pointer element
+        Cell current = head;
 
-		// Initialize head element
-		if (current == null) {
-			head = new Cell(element, null, null);
+        boolean added = false;
 
-			// Initialize elements after head was initialized
-		} else {
+        // Initialize head element
+        if (current == null) {
+            head = new Cell(element, null, null);
 
-			// Special case: New element needs to be before head
-			// Need to change head element
-			if (element.compareTo(current.content) < 0) {
-				Cell temp = head;
-				Cell newElement = new Cell(element, null, temp);
-				temp.prev = newElement;
-				head = newElement;
-				added = true;
-			}
-			
-			// Iterate through list until end reached
-			while (current.next != null && !added) {
+            // Initialize elements after head was initialized
+        } else {
 
-				// When new element is lower than current neighbour, 
-				// put it in between
-				if (element.compareTo(current.next.content) < 0) {
+            // Special case: New element needs to be before head
+            // Need to change head element
+            if (element.compareTo(current.content) < 0) {
+                Cell temp = head;
+                Cell newElement = new Cell(element, null, temp);
+                temp.prev = newElement;
+                head = newElement;
+                added = true;
+            }
 
-					Cell newElement = new Cell(element, current, current.next);
-						
-					// Right neighbour of newCell has to point on newCell
-					newElement.next.prev = newElement; 
-					
-					// Left neighbour of newCell has to point on newCell
-					current.next = newElement; 
-					added = true;
-					break;
-				}
+            // Iterate through list until end reached
+            while (current.next != null && !added) {
 
-				// When new element is equal or higher, continue down the list
-				else if (element.compareTo(current.content) >= 0) {
-					current = current.next;
-				}
-			}
+                // When new element is lower than current neighbour,
+                // put it in between
+                if (element.compareTo(current.next.content) < 0) {
 
-			// Reached end but not yet added to list: put at the end
-			if (!added) {
-				current.next = new Cell(element, current, null);
-			}
-		}
-	}
+                    Cell newElement = new Cell(element, current, current.next);
 
-	@Override
-	public SortedIterator<T> iterator() {
-		return new Iterator();
-	}
+                    // Right neighbour of newCell has to point on newCell
+                    newElement.next.prev = newElement;
 
-	@Override
-	public String toString() { // TODO: Remove
-		String str = head.content.toString();
+                    // Left neighbour of newCell has to point on newCell
+                    current.next = newElement;
+                    added = true;
+                    break;
+                }
 
-		Cell current = head; // TODO: nice name
+                // When new element is equal or higher, continue down the list
+                else if (element.compareTo(current.content) >= 0) {
+                    current = current.next;
+                }
+            }
 
-		while (current.next != null) {
-			current = current.next;
-			str += ", " + current.content.toString();
-		}
+            // Reached end but not yet added to list: put at the end
+            if (!added) {
+                current.next = new Cell(element, current, null);
+            }
+        }
+    }
 
-		return str;
-	}
+    @Override
+    public SortedIterator<T> iterator() {
+        return new Iterator();
+    }
+
+    @Override
+    public String toString() { // TODO: Remove
+        String str = head.content.toString();
+
+        Cell current = head; // TODO: nice name
+
+        while (current.next != null) {
+            current = current.next;
+            str += ", " + current.content.toString();
+        }
+
+        return str;
+    }
 }

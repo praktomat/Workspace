@@ -84,7 +84,7 @@ public class CalendarManagement {
             for (int i = 4; i < input.length; i++)
                 name += input[i];
 
-            input = new String[] { input[0], input[1], input[2], input[3], name };
+            input = new String[] {input[0], input[1], input[2], input[3], name };
 
             // "print appointments that conflict with <appointmentTitle>"
         } else if (input.length > 2 && input[3].equals("conflict")) {
@@ -96,7 +96,7 @@ public class CalendarManagement {
             for (int i = 5; i < input.length; i++)
                 name += input[i];
 
-            input = new String[] { input[0], input[1], input[2], input[3], input[4], name };
+            input = new String[] {input[0], input[1], input[2], input[3], input[4], name };
 
         }
 
