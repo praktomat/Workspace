@@ -1,5 +1,5 @@
 
-package edu.kit.calendar;
+package edu.kit.informatik;
 
 /**
  * Represents a specific time of a day in seconds, minutes and hours.

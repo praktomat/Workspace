@@ -1,19 +1,17 @@
-package edu.kit.sortedlist;
+package edu.kit.informatik;
 
 /**
- * An interface for Objects that implement a flexible sorted list.
+ * An interface for objects that implement a flexible and self-sorting list.
  * 
  * @author Julien Midedji
- * @param <T>
- *            type of compared values
+ * @param <T> type of compared values
  */
 interface SortedAppendList<T extends Comparable<T>> {
 
     /**
-     * Adds an element to list so that its correctly ordered
+     * Adds an element to list so that it's correctly ordered
      * 
-     * @param element
-     *            to add
+     * @param element to add
      */
     void addSorted(T element);
 

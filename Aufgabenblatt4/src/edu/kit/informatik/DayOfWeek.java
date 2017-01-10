@@ -1,5 +1,5 @@
 
-package edu.kit.calendar;
+package edu.kit.informatik;
 
 /**
  * Represents a day of a week.

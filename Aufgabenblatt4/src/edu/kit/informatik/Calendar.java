@@ -1,8 +1,13 @@
-package edu.kit.calendar;
+package edu.kit.informatik;
 
-import edu.kit.sortedlist.LinkedSortedAppendList;
-import edu.kit.sortedlist.SortedIterator;
+import edu.kit.calendar.Terminal;
 
+/**
+ * Stores Appointments and applies commands to the set
+ * 
+ * @author Julien Midedji
+ *
+ */
 public class Calendar {
 
     LinkedSortedAppendList<Appointment> list;
@@ -44,8 +49,7 @@ public class Calendar {
     /**
      * Prints all entries before the input
      * 
-     * @param input
-     *            An Appointment entry string
+     * @param input An Appointment entry string
      */
     public void printBefore(DateTime input) {
 
@@ -89,10 +93,8 @@ public class Calendar {
      * 
      * Prints all entries between the specified start and end date
      * 
-     * @param start
-     *            left margin
-     * @param end
-     *            right margin
+     * @param start left margin
+     * @param end right margin
      */
     public void printBetween(DateTime start, DateTime end) {
 
@@ -110,8 +112,11 @@ public class Calendar {
     }
 
     /**
+     * Print conflicting Appointments
      * 
-     * @param input
+     * Appoints conflict if their respective ranges overlap
+     * 
+     * @param input name of Appointment
      */
     public void printConflicting(String input) {
 
@@ -139,9 +144,10 @@ public class Calendar {
     }
 
     /**
+     * Find the Appointment with the inputted name
      * 
-     * @param string
-     * @return
+     * @param string name of Appointment
+     * @return Appointment with the name, or null if none found
      */
     private Appointment getEntry(String string) {
 
@@ -158,20 +164,3 @@ public class Calendar {
     }
 
 }
-
-/*
-add appointment 29-11-2016T17:00:00 14-12-2016T13:00:00 Blatt 3 
-add appointment 13-12-2016T17:00:00 11-01-2017T13:00:00 Blatt 4 
-add appointment 05-11-2016T13:00:00 05-11-2016T14:00:00 Kaffee
- * 
- * print appointments that start before 01-12-2016T00:00:00
- * 
- * print appointments on 13-12-2016
- * 
- * print appointments on 05-11-2016
- * 
- * print appointments in interval 15-11-2016T13:00:00 01-01-2017T00:00:00
- * 
-add appointment 24-12-2016T00:00:00 26-12-2016T23:59:59 Weihnachten 
-print appointments that conflict with Blatt 4
- */

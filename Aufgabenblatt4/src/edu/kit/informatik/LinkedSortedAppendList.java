@@ -1,15 +1,12 @@
-package edu.kit.sortedlist;
+package edu.kit.informatik;
 
 /**
  * Creates a linked list that is sorted
  * 
  * @author Julien Midedji
- * @param <T>
- *            The variable type to sort
+ * @param <T> The variable type to sort
  */
 public class LinkedSortedAppendList<T extends Comparable<T>> implements SortedAppendList<T> {
-
-    // ^TODO: make not public?
 
     /**
      * First entry in list
@@ -19,7 +16,6 @@ public class LinkedSortedAppendList<T extends Comparable<T>> implements SortedAp
     /**
      * Initialize empty List
      */
-    // TODO: stay public?
     public LinkedSortedAppendList() {
         head = null;
     }
@@ -28,8 +24,7 @@ public class LinkedSortedAppendList<T extends Comparable<T>> implements SortedAp
      * A Cell represents a single element in the list holding the value and a
      * reference to its neighbour cells
      *
-     * @param <T>
-     *            type of value
+     * @param <T> type of value
      */
     private class Cell {
         private T content;
@@ -40,25 +35,6 @@ public class LinkedSortedAppendList<T extends Comparable<T>> implements SortedAp
             this.content = content;
             this.prev = prev;
             this.next = next;
-        }
-
-        @Override
-        public String toString() { // TODO: Remove
-
-            String nextStr;
-            String prevStr;
-
-            if (next == null)
-                nextStr = "null";
-            else
-                nextStr = next.content.toString();
-
-            if (prev == null)
-                prevStr = "null";
-            else
-                prevStr = prev.content.toString();
-
-            return "[<< " + prevStr + " << | " + content.toString() + " | >> " + nextStr + " >>]";
         }
     }
 
@@ -98,8 +74,7 @@ public class LinkedSortedAppendList<T extends Comparable<T>> implements SortedAp
     /**
      * Returns the element at the specific position in the list
      * 
-     * @param index
-     *            Position of element
+     * @param index Position of element
      * @return Element at position
      */
     private Cell getElement(int index) {
@@ -114,8 +89,7 @@ public class LinkedSortedAppendList<T extends Comparable<T>> implements SortedAp
     /**
      * Adds an element to list in correct order
      * 
-     * @param element
-     *            to add
+     * @param element to add
      */
     @Override
     public void addSorted(T element) {
@@ -161,34 +135,18 @@ public class LinkedSortedAppendList<T extends Comparable<T>> implements SortedAp
                 }
 
                 // When new element is equal or higher, continue down the list
-                else if (element.compareTo(current.content) >= 0) {
+                else if (element.compareTo(current.content) >= 0)
                     current = current.next;
-                }
             }
 
             // Reached end but not yet added to list: put at the end
-            if (!added) {
+            if (!added)
                 current.next = new Cell(element, current, null);
-            }
         }
     }
 
     @Override
     public SortedIterator<T> iterator() {
         return new Iterator();
-    }
-
-    @Override
-    public String toString() { // TODO: Remove
-        String str = head.content.toString();
-
-        Cell current = head; // TODO: nice name
-
-        while (current.next != null) {
-            current = current.next;
-            str += ", " + current.content.toString();
-        }
-
-        return str;
     }
 }

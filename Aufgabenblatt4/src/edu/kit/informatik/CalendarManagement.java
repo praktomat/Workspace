@@ -1,8 +1,16 @@
-package edu.kit.calendar;
+package edu.kit.informatik;
 
+import edu.kit.calendar.Terminal;
+
+/**
+ * Reads, interprets and executes calendar commands
+ * 
+ * @author Julien Midedji
+ *
+ */
 public class CalendarManagement {
 
-    private static Calendar calendar; // TODO: Can this stay static?
+    private static Calendar calendar;
 
     public static void main(String[] args) {
 
@@ -56,7 +64,7 @@ public class CalendarManagement {
                 break;
 
             default:
-                System.out.println("Unknown command");
+                Terminal.printLine("Unknown command");
                 break;
 
             }
@@ -73,12 +81,13 @@ public class CalendarManagement {
         // Splitting with spaces results in the name-argument being split as
         // well
         String[] input = Terminal.readLine().split(" ");
+        String name = "";
 
-        // If input might have a name argument
+        
+        
+        // If input might have a name argument, concatenate the name to one word
         // "add appointment <DateTime> <DateTime> <appointmentTitle>
         if (input.length > 2 && isDateTime(input[2]) && isDateTime(input[3])) {
-
-            String name = "";
 
             // Concatenate String
             for (int i = 4; i < input.length; i++)
@@ -86,11 +95,8 @@ public class CalendarManagement {
 
             input = new String[] {input[0], input[1], input[2], input[3], name };
 
-            // "print appointments that conflict with <appointmentTitle>"
+        // "print appointments that conflict with <appointmentTitle>"
         } else if (input.length > 2 && input[3].equals("conflict")) {
-
-            // TODO: Copied!
-            String name = "";
 
             // Concatenate String
             for (int i = 5; i < input.length; i++)

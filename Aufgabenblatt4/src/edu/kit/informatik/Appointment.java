@@ -1,5 +1,5 @@
 
-package edu.kit.calendar;
+package edu.kit.informatik;
 
 /**
  * Represents an appointment with a specific name.

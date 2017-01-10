@@ -1,5 +1,5 @@
 
-package edu.kit.calendar;
+package edu.kit.informatik;
 
 import static java.lang.Integer.parseInt;
 

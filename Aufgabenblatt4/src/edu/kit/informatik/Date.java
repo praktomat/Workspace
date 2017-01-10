@@ -1,5 +1,5 @@
 
-package edu.kit.calendar;
+package edu.kit.informatik;
 
 /**
  * Represents a date consisting of a year, a {@linkplain Month month} and a day.

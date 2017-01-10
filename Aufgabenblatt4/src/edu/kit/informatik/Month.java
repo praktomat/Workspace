@@ -1,7 +1,7 @@
 
-package edu.kit.calendar;
+package edu.kit.informatik;
 
-import static edu.kit.calendar.YearKind.NO_LEAP_YEAR;
+import static edu.kit.informatik.YearKind.NO_LEAP_YEAR;
 
 /**
  * Represents a month of a year.

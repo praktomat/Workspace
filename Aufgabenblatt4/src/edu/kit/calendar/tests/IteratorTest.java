@@ -3,10 +3,9 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import org.junit.Test;
 
-import edu.kit.calendar.Date;
-// modify as needed
-import iterator.FixedDeltaDateIterator;
-import iterator.UnionSortedIterator;
+import edu.kit.informatik.Date;
+import edu.kit.informatik.FixedDeltaDateIterator;
+import edu.kit.informatik.UnionSortedIterator;
 
 
 /**

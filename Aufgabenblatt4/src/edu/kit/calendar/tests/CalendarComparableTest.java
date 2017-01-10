@@ -2,10 +2,10 @@ package edu.kit.calendar.tests;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-import edu.kit.calendar.Appointment;
-import edu.kit.calendar.Date;
-import edu.kit.calendar.DateTime;
-import edu.kit.calendar.Time;
+import edu.kit.informatik.Appointment;
+import edu.kit.informatik.Date;
+import edu.kit.informatik.DateTime;
+import edu.kit.informatik.Time;
 
 
 /**

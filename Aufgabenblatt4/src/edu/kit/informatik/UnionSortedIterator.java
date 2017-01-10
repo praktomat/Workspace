@@ -1,14 +1,20 @@
-package iterator;
+package edu.kit.informatik;
 
-import edu.kit.sortedlist.LinkedSortedAppendList;
-import edu.kit.sortedlist.SortedIterator;
-
+/**
+ * Creates a single and sorted list of two SortedAppendLists 
+ * 
+ * @author Julien Midedji
+ *
+ * @param <T> type of values stored
+ */
 public class UnionSortedIterator<T extends Comparable<T>> implements SortedIterator<T> {
 
     private LinkedSortedAppendList<T> combination;
     private SortedIterator<T> iterator;
 
     public UnionSortedIterator(SortedIterator<T> iteratorA, SortedIterator<T> iteratorB) {
+        
+        // Combine both lists
         combination = new LinkedSortedAppendList<>();
 
         while (iteratorA.hasNext())

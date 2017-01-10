@@ -1,7 +1,9 @@
 package iterator;
 
-import edu.kit.calendar.Date;
 import edu.kit.calendar.Terminal;
+import edu.kit.informatik.Date;
+import edu.kit.informatik.FixedDeltaDateIterator;
+import edu.kit.informatik.UnionSortedIterator;
 
 public class Main {
 

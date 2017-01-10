@@ -1,8 +1,8 @@
 
-package edu.kit.calendar;
+package edu.kit.informatik;
 
-import static edu.kit.calendar.Month.DECEMBER;
-import static edu.kit.calendar.Month.JANUARY;
+import static edu.kit.informatik.Month.DECEMBER;
+import static edu.kit.informatik.Month.JANUARY;
 
 /**
  * Represents the kind of a year. A year can be either a leap year or not a leap year.

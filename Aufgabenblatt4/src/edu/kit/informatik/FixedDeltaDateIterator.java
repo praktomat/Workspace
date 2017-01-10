@@ -1,8 +1,14 @@
-package iterator;
+package edu.kit.informatik;
 
-import edu.kit.calendar.Date;
-import edu.kit.sortedlist.SortedIterator;
-
+/**
+ * Creates a new {@link FixedDeltaDateIterator} that will return all elements of
+ * the (infinite) set of all Dates <code>startDate + (deltaDay, deltaMonth, deltaYear)</code>
+ * lesser than endDate. The Dates are
+ * returned in the natural ordering, starting with <code>startDate</code>
+ * 
+ * @author Julien Midedji
+ * 
+ **/
 public class FixedDeltaDateIterator implements SortedIterator<Date> {
 
     private Date startDate;
@@ -11,7 +17,6 @@ public class FixedDeltaDateIterator implements SortedIterator<Date> {
     private int deltaMonth;
     private int deltaDay;
 
-    // TODO:
     private int pointer;
 
     public FixedDeltaDateIterator(Date startDate, Date endDate, int deltaYear, int deltaMonth, int deltaDay) {
@@ -25,29 +30,30 @@ public class FixedDeltaDateIterator implements SortedIterator<Date> {
 
     @Override
     public boolean hasNext() {
-        Date increment = getIncrement(pointer + 1);
+        Date next = getDate(pointer + 1);
 
-        return endDate == null || increment.isBefore(endDate) || increment.isEqual(endDate);
+        return endDate == null || next.isBefore(endDate) || next.isEqual(endDate);
     }
 
     @Override
     public Date next() {
         if (hasNext()) {
             pointer++;
-            return getIncrement(pointer);
+            return getDate(pointer);
         } else
             return null;
     }
 
     /**
+     * Returns the date at the given position
      * 
-     * @return
+     * @return position of Date
      */
-    private Date getIncrement(int repeat) {
+    private Date getDate(int position) {
 
         Date result = startDate;
 
-        for (int i = 0; i < repeat; i++)
+        for (int i = 0; i < position; i++)
             result = result.plus(new Date(deltaYear, deltaMonth, deltaDay));
 
         return result;
