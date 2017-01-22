@@ -30,15 +30,13 @@ public class Main {
     public static void main(String[] args) {
 
         Student student = new Student("Julien", "Midedji");
-        
-        
         Student student2 = new Student("Julien", "Midedji");
-        
-        
         Student student3 = new Student("Julien", "Midedji");
         
     }
 
     // TODO: All construcotrs are currenly protected
-    
+    // Getter and Setter in abstract classes sind protected
+    // TODO: Check all scopes, and fields by instantiating each class
+    // TODO: Notenberechnung wurde übersprungen
 }

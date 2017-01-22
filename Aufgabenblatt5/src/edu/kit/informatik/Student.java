@@ -18,6 +18,11 @@ public class Student extends User {
     private final String id = generateMatrNumber();
     
     /**
+     * Keeps journal of all credits this student has
+     */
+    private PerformanceRecord record;
+    
+    /**
      * Creates a new student account.
      * 
      * @param firstName first name
@@ -34,6 +39,14 @@ public class Student extends User {
      */
     protected String getId() {
         return id;
+    }
+    
+    // TODO: "Ist für eine Vorlesung noch keine Note eingetragen, 
+    // so wird diese Vorlesung nicht bei der Berechnung der Durchschnittsnote 
+    // eines Moduls beachtet"
+    
+    protected int getOverallAverageGrade() {
+        return -1;
     }
     
     /**
