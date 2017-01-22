@@ -41,4 +41,5 @@ public class Main {
     // Getter and Setter in abstract classes sind protected
     // TODO: Check all scopes, and fields by instantiating each class
     // TODO: Notenberechnung wurde übersprungen
+    // TODO: Error, falls namen nicht alle kleingeschrieben sind
 }

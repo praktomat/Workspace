@@ -1,19 +1,25 @@
 package edu.kit.informatik;
 
+import edu.kit.informatik.accounts.Professor;
+import edu.kit.informatik.accounts.Student;
 import edu.kit.informatik.helper.Commands;
 import edu.kit.informatik.helper.Terminal;
+import edu.kit.informatik.sorting.LinkedSortedAppendList;
 
 public class Console {
 
     public static void main(String[] args) {
-        
+
+        LinkedSortedAppendList<Student> studentList = new LinkedSortedAppendList<Student>();
+        LinkedSortedAppendList<Professor> professorList = new LinkedSortedAppendList<Professor>();
+
         // Loops until "quit"
-        while(true) {
+        while (true) {
             String[] input = Terminal.readLine().split(" ");
-            
-            switch(Commands.valueOf(input[0])) {
+
+            switch (Commands.valueOf(input[0])) {
             case ADD_LECTURE:
-                
+
                 break;
             case ADD_MODULE:
                 break;
@@ -43,16 +49,11 @@ public class Console {
                 break;
             default:
                 break;
-            
-            
-            
+
             }
-            
-            
-            
-        }    
-        
-        
+
+        }
+
         // TODO: gleitkommazahlen auf 2 nachkommastellen
     }
 }
