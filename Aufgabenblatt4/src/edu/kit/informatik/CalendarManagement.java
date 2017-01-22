@@ -1,7 +1,5 @@
 package edu.kit.informatik;
 
-import edu.kit.calendar.Terminal;
-
 /**
  * Reads, interprets and executes calendar commands
  * 

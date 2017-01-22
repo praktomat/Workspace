@@ -1,6 +1,6 @@
 package edu.kit.informatik;
 
-import edu.kit.calendar.Terminal;
+import edu.kit.informatik.Terminal;
 
 /**
  * Stores Appointments and applies commands to the set

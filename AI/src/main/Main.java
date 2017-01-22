@@ -10,6 +10,8 @@ import java.util.regex.Pattern;
 
 public class Main {
 
+    // TODO: Exit when no input
+    
     public static void main(String[] args) throws InterruptedException, IOException {
         
         // Clear screen

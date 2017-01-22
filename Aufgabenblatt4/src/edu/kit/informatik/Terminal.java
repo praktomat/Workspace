@@ -1,4 +1,4 @@
-package edu.kit.calendar;
+package edu.kit.informatik;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

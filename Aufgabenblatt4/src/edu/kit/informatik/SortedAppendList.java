@@ -6,7 +6,7 @@ package edu.kit.informatik;
  * @author Julien Midedji
  * @param <T> type of compared values
  */
-interface SortedAppendList<T extends Comparable<T>> {
+public interface SortedAppendList<T extends Comparable<T>> {
 
     /**
      * Adds an element to list so that it's correctly ordered
