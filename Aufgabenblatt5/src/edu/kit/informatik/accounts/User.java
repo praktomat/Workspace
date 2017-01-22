@@ -1,4 +1,4 @@
-package edu.kit.informatik;
+package edu.kit.informatik.accounts;
 
 /**
  * @TODO: MIssing javadoc
@@ -37,14 +37,14 @@ public abstract class User {
      * 
      * @return identification for this User
      */
-    protected abstract String getId();
+    public abstract String getId();
 
     /**
      * Returns first name
      * 
      * @return first name
      */
-    protected String getFirstName() {
+    public String getFirstName() {
         return firstName;
     }
 
@@ -53,7 +53,7 @@ public abstract class User {
      * 
      * @return last name
      */
-    protected String getLastName() {
+    public String getLastName() {
         return lastName;
     }
 }

@@ -1,5 +1,5 @@
 
-package sorting;
+package edu.kit.informatik.sorting;
 
 /**
  * Implementation of the {@linkplain SortedAppendList} interface.

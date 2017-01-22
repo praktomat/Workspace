@@ -1,5 +1,5 @@
 
-package sorting;
+package edu.kit.informatik.sorting;
 
 /**
  * Contains methods that operate on or return sorted lists or are otherwise used by list implementations.

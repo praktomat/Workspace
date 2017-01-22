@@ -1,4 +1,4 @@
-package edu.kit.informatik;
+package edu.kit.informatik.events;
 
 /**
  * TODO: Javadoc
@@ -36,14 +36,14 @@ public abstract class Course {
     /**
      * Should return the amount of credit this course grants in total
      */
-    protected abstract int getCredits();
+    public abstract int getCredits();
     
     /**
      * Returns tne name of the course
      * 
      * @return name of course
      */
-    protected String getName() {
+    public String getName() {
         return name;
     }
     
@@ -52,7 +52,7 @@ public abstract class Course {
      * 
      * @return id of course
      */
-    protected int getId() {
+    public int getId() {
         return id;
     }
 }

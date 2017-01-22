@@ -1,4 +1,4 @@
-package edu.kit.informatik;
+package edu.kit.informatik.events;
 
 /**
  * TODO: Javadoc
@@ -14,7 +14,7 @@ public class Module extends Course {
      * 
      * @param name Name of module
      */
-    protected Module(String name, Lecture[] lectures) {
+    public Module(String name, Lecture[] lectures) {
         super(name);
         this.lectures = lectures; //TODO: Maximum credits allowed: 45 
     }
@@ -25,7 +25,7 @@ public class Module extends Course {
      * @return total credits this module grants
      */
     @Override
-    protected int getCredits() {
+    public int getCredits() {
         int totalCredits = 0;
         
         for(Lecture lecture : lectures)

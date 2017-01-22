@@ -1,8 +1,15 @@
-package edu.kit.informatik;
+package edu.kit.informatik.behindscenes;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import edu.kit.informatik.accounts.Chair;
+import edu.kit.informatik.accounts.Professor;
+import edu.kit.informatik.accounts.Student;
+import edu.kit.informatik.accounts.User;
+import edu.kit.informatik.events.Lecture;
+import edu.kit.informatik.events.Module;
 
 public class StudentportalTest {
 

@@ -1,5 +1,5 @@
 
-package sorting;
+package edu.kit.informatik.sorting;
 
 /**
  * A sorted list.

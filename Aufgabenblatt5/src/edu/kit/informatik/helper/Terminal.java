@@ -1,4 +1,4 @@
-package edu.kit.informatik;
+package edu.kit.informatik.helper;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

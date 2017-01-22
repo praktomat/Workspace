@@ -1,4 +1,4 @@
-package edu.kit.informatik;
+package edu.kit.informatik.accounts;
 
 /**
  * Represents a professor account.
@@ -18,7 +18,7 @@ public class Professor extends User {
      * @param firstName first name
      * @param lastName last name
      */
-    protected Professor(String firstName, String lastName, Chair chair) {
+    public Professor(String firstName, String lastName, Chair chair) {
         super(firstName, lastName);
         this.chair = chair; 
     }
@@ -29,7 +29,7 @@ public class Professor extends User {
      * @return first name and last name with one space in between. 
      */
     @Override
-    protected String getId() {
+    public String getId() {
         return getFirstName() + " " + getLastName();
     }
 

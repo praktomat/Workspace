@@ -1,4 +1,6 @@
-package edu.kit.informatik;
+package edu.kit.informatik.accounts;
+
+import edu.kit.informatik.helper.PerformanceRecord;
 
 /**
  * Represents a student account.
@@ -28,7 +30,7 @@ public class Student extends User {
      * @param firstName first name
      * @param lastName last name
      */
-    Student(String firstName, String lastName) {
+    public Student(String firstName, String lastName) {
         super(firstName, lastName);
     }
 
@@ -37,7 +39,7 @@ public class Student extends User {
      * 
      * @return id the identifier
      */
-    protected String getId() {
+    public String getId() {
         return id;
     }
     
@@ -45,7 +47,7 @@ public class Student extends User {
     // so wird diese Vorlesung nicht bei der Berechnung der Durchschnittsnote 
     // eines Moduls beachtet"
     
-    protected int getOverallAverageGrade() {
+    public int getOverallAverageGrade() {
         return -1;
     }
     

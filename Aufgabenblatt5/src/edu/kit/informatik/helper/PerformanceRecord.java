@@ -1,4 +1,6 @@
-package edu.kit.informatik;
+package edu.kit.informatik.helper;
+
+import edu.kit.informatik.events.Module;
 
 /**
  * TODO: Javadoc

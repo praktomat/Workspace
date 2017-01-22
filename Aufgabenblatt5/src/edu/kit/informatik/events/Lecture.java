@@ -1,4 +1,6 @@
-package edu.kit.informatik;
+package edu.kit.informatik.events;
+
+import edu.kit.informatik.accounts.Professor;
 
 /**
  * TODO: Javadoc
@@ -30,7 +32,7 @@ public class Lecture extends Course {
      * @param module what this lecture is part of
      * @param lecturer the professor that holds this lecture
      */
-    protected Lecture(String name, int credits, Module module, Professor lecturer) {
+    public Lecture(String name, int credits, Module module, Professor lecturer) {
         super(name);
         this.credits = credits; // TODO: höchstens 9 leistungspunkte
         this.module = module;
@@ -41,7 +43,7 @@ public class Lecture extends Course {
      * Return the amount of credit this lecture grants in total
      */
     @Override
-    protected int getCredits() {
+    public int getCredits() {
         return credits;
     }
 }

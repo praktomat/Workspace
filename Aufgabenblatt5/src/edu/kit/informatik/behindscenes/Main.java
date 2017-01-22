@@ -1,4 +1,6 @@
-package edu.kit.informatik;
+package edu.kit.informatik.behindscenes;
+
+import edu.kit.informatik.accounts.Student;
 
 public class Main {
 

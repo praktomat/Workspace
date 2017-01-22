@@ -1,5 +1,5 @@
 
-package sorting;
+package edu.kit.informatik.sorting;
 
 /**
  * An iterator that returns elements in a sorted order.
